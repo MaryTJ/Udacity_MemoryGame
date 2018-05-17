@@ -14,6 +14,7 @@ const deck = document.querySelector(".deck");
 const reset = document.querySelector(".restart");
 const moveCount = document.querySelector(".moves");
 var moveCounter;
+var allCardsMatched;
 var openCards = new Array();
 let card_array = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-anchor", "fa fa-leaf", "fa fa-bicycle", "fa fa-diamond",
 				 "fa fa-bomb", "fa fa-leaf", "fa fa-bomb", "fa fa-bolt", "fa fa-bicycle", "fa fa-paper-plane-o", "fa fa-cube"]
@@ -28,6 +29,22 @@ function setCounter(){
 function incrementCounter(){
 	moveCounter++;
 	moveCount.textContent = moveCounter;
+}
+
+//Function to initialize cards matched counter//
+function setCardsMatched(){
+	allCardsMatched = 0;
+}
+
+
+//Function to check if all cards are flipped//
+function allCardsFlipped(){
+	allCardsMatched = allCardsMatched + 2;
+	if (allCardsMatched == 16){
+		alert(`You have finished the game. 
+			Number of Moves: ${moveCounter}
+			Score:`);
+	}
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -65,6 +82,7 @@ function startGame(){
 	shuffle(card_array);
 	addCardHTML(card_array);
 	setCounter();
+	setCardsMatched();
 }
 
 startGame();
@@ -106,6 +124,7 @@ function matchCards(){
 				{
 					oneCard.className = "card match";
 					secondCard.className = "card match";
+					allCardsFlipped();
 				}
 			else
 				{
@@ -119,7 +138,9 @@ function matchCards(){
 /*Event listener for opening a card*/
 deck.addEventListener("click",function(e)
 {
-	flipCard(e);
+	if (e.target.className != "deck"){
+		flipCard(e);
+	}
 })
 
 /*Event Listener for resetting the game*/
