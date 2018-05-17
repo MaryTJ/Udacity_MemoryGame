@@ -10,8 +10,11 @@
  *   - add each card's HTML to the page
  */
 
+const deck = document.querySelector(".deck");
+var openCards = new Array();
 let card_array = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-anchor", "fa fa-leaf", "fa fa-bicycle", "fa fa-diamond",
 				 "fa fa-bomb", "fa fa-leaf", "fa fa-bomb", "fa fa-bolt", "fa fa-bicycle", "fa fa-paper-plane-o", "fa fa-cube"]
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -31,10 +34,10 @@ function shuffle(array) {
 /*Function to rename elements based on the shuffled array*/
 function addCardHTML(card_array) {
 	
-	deck = document.querySelector(".deck");
+	/*let deck = document.querySelector(".deck");*/
 	
-	var liElements = deck.getElementsByTagName("li");
-	var iElements = deck.getElementsByTagName("i");
+	const liElements = deck.getElementsByTagName("li");
+	const iElements = deck.getElementsByTagName("i");
 
 	for(let i = 0; i < liElements.length; i++){
 		liElements[i].className = "card";
@@ -42,37 +45,6 @@ function addCardHTML(card_array) {
 	}
 
 }
-	/*
-	deckHTML.classList.remove("match","open","show");
-	
-	console.log(deckHTML.innerHTML);
-	
-
-	console.log(deckHTML.length);
-	card_array.forEach(function(element){
-		let oneCard= "<li class=\"card\"> <i class=" ${element}"></i></li>";
-		deckHTML.appendChild(oneCard);
-          
-
-	})
-}
-	
-
-
-/*
-function addCardHTML(card_array) {
-	let deck = document.querySelector("deck");
-	card_array.forEach(function(element){
-		let oneCard=`<li class=\"card\">
-		<i class="${element}"></i>
-</li>`;
-		console.log(oneCard);
-		deck.innerHTML.appendChild(oneCard);
-		})
-	console.log(deck.innerHTML);
-
-}
-*/
 
 shuffle(card_array);
 addCardHTML(card_array);
@@ -91,3 +63,66 @@ addCardHTML(card_array);
  */
 /*Event listener for opening a card*/
 
+
+function flipCard(e){
+	if (e.target.className != "card match" && e.target.className != "card open show"){
+		e.target.className = "card open show";
+		/*console.log(e.target.childNodes[1].className);*/
+		openCards.push(e.target);
+		setTimeout(function(){
+		matchCards()},50);
+	}
+		
+}
+
+function matchCards(){
+	if (openCards.length == 2)
+		{
+			let oneCard = openCards.pop();
+			let secondCard = openCards.pop();
+
+			if (oneCard.childNodes[1].className == secondCard.childNodes[1].className)
+				{
+					oneCard.className = "card match";
+					secondCard.className = "card match";
+				}
+			else
+				{
+					oneCard.className = "card";
+					secondCard.className = "card";
+				}
+		}
+	
+}
+
+
+deck.addEventListener("click",function(e)
+{
+	flipCard(e);
+/*	e.target.className = "card open show";
+	console.log(e.target.childNodes[1].className);
+
+	openCards.push(e.target);
+	
+	if (openCards.length == 2)
+		{
+			let oneCard = openCards.pop();
+			
+
+			let secondCard = openCards.pop();
+
+			if (oneCard.childNodes[1].className == secondCard.childNodes[1].className)
+				{
+					oneCard.className = "card match";
+					secondCard.className = "card match";
+				}
+			else
+				{
+					oneCard.className = "card";
+					secondCard.className = "card";
+				}
+		}
+	
+	console.log(deck.innerHTML);
+*/
+})
