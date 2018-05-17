@@ -13,6 +13,7 @@
 const deck = document.querySelector(".deck");
 const reset = document.querySelector(".restart");
 const moveCount = document.querySelector(".moves");
+const starsArray = document.querySelectorAll(".fa-star");
 var moveCounter;
 var allCardsMatched;
 var openCards = new Array();
@@ -29,6 +30,7 @@ function setCounter(){
 function incrementCounter(){
 	moveCounter++;
 	moveCount.textContent = moveCounter;
+	changeStarColor();
 }
 
 //Function to initialize cards matched counter//
@@ -36,6 +38,12 @@ function setCardsMatched(){
 	allCardsMatched = 0;
 }
 
+//Function to initialize all three stars color to black//
+function setInitialStars(){
+	for (let i=0; i<starsArray.length; i++){
+		starsArray[i].style.color = "black";
+	}
+}
 
 //Function to check if all cards are flipped//
 function allCardsFlipped(){
@@ -44,6 +52,19 @@ function allCardsFlipped(){
 		alert(`You have finished the game. 
 			Number of Moves: ${moveCounter}
 			Score:`);
+	}
+}
+
+//Function to change stars color to red based on the number of moves//
+function changeStarColor(){
+	if (moveCounter >= 12 && moveCounter < 20){
+		starsArray[2].style.color = "red";
+	}
+	else if (moveCounter >= 20 && moveCounter < 30){
+		starsArray[1].style.color = "red";
+	}
+	else if (moveCounter > 30){
+		starsArray[0].style.color = "red";
 	}
 }
 
@@ -83,6 +104,7 @@ function startGame(){
 	addCardHTML(card_array);
 	setCounter();
 	setCardsMatched();
+	setInitialStars();
 }
 
 startGame();
