@@ -12,10 +12,23 @@
 
 const deck = document.querySelector(".deck");
 const reset = document.querySelector(".restart");
+const moveCount = document.querySelector(".moves");
+var moveCounter;
 var openCards = new Array();
 let card_array = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-anchor", "fa fa-leaf", "fa fa-bicycle", "fa fa-diamond",
 				 "fa fa-bomb", "fa fa-leaf", "fa fa-bomb", "fa fa-bolt", "fa fa-bicycle", "fa fa-paper-plane-o", "fa fa-cube"]
 
+//Function to set counter//
+function setCounter(){
+	moveCounter = 0;
+	moveCount.textContent = moveCounter;
+}
+
+//Function to add moves to counter and display it//
+function incrementCounter(){
+	moveCounter++;
+	moveCount.textContent = moveCounter;
+}
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -51,6 +64,7 @@ function addCardHTML(card_array) {
 function startGame(){
 	shuffle(card_array);
 	addCardHTML(card_array);
+	setCounter();
 }
 
 startGame();
@@ -73,10 +87,10 @@ addCardHTML(card_array);
 function flipCard(e){
 	if (e.target.className != "card match" && e.target.className != "card open show"){
 		e.target.className = "card open show";
-		/*console.log(e.target.childNodes[1].className);*/
 		openCards.push(e.target);
 		setTimeout(function(){
 		matchCards()},50);
+		incrementCounter();
 	}
 		
 }
