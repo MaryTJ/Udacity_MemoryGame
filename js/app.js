@@ -14,9 +14,16 @@ const deck = document.querySelector(".deck");
 const reset = document.querySelector(".restart");
 const moveCount = document.querySelector(".moves");
 const starsArray = document.querySelectorAll(".fa-star");
+const timer = document.querySelector(".timer");
 var moveCounter;
 var allCardsMatched;
 var openCards = new Array();
+//Time Calculation variabls//
+var hrs = 0;
+var mins = 0;
+var secs = 0;
+var t;//For time out function
+//===========================//
 let card_array = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-anchor", "fa fa-leaf", "fa fa-bicycle", "fa fa-diamond",
 				 "fa fa-bomb", "fa fa-leaf", "fa fa-bomb", "fa fa-bolt", "fa fa-bicycle", "fa fa-paper-plane-o", "fa fa-cube"]
 
@@ -68,6 +75,40 @@ function changeStarColor(){
 	}
 }
 
+function setTimer(){
+	clearTimeout(t);
+	secs = 0;
+	mins = 0;
+	hrs = 0;
+}
+
+//Function to calculate elapsed time. I have taken help from this article https://www.ostraining.com/blog/coding/stopwatch///
+function calcTime(){
+	secs++;
+	if (secs == 60){
+		mins++;
+		secs = 0;
+	} 
+	else if (mins == 60){
+		hrs++;
+		mins = 0;
+	}
+	if (mins < 10 && secs < 10){
+		timer.innerHTML = `Time elapsed: ${hrs}:0${mins}:0${secs}`;
+	}
+	else if (secs < 10){
+		timer.innerHTML = `Time elapsed: ${hrs}:${mins}:0${secs}`;
+	}
+	else if (mins < 10){
+		timer.innerHTML = `Time elapsed: ${hrs}:0${mins}:${secs}`;
+	}
+	else{
+		timer.innerHTML = `Time elapsed: ${hrs}:${mins}:${secs}`;
+	}
+	t = setTimeout(calcTime, 1000);
+	
+}
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -102,6 +143,8 @@ function addCardHTML(card_array) {
 function startGame(){
 	shuffle(card_array);
 	addCardHTML(card_array);
+	setTimer();
+	calcTime();
 	setCounter();
 	setCardsMatched();
 	setInitialStars();
