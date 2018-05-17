@@ -11,6 +11,7 @@
  */
 
 const deck = document.querySelector(".deck");
+const reset = document.querySelector(".restart");
 var openCards = new Array();
 let card_array = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-anchor", "fa fa-leaf", "fa fa-bicycle", "fa fa-diamond",
 				 "fa fa-bomb", "fa fa-leaf", "fa fa-bomb", "fa fa-bolt", "fa fa-bicycle", "fa fa-paper-plane-o", "fa fa-cube"]
@@ -46,8 +47,13 @@ function addCardHTML(card_array) {
 
 }
 
-shuffle(card_array);
-addCardHTML(card_array);
+/*Function to start/restart game and set parameters*/
+function startGame(){
+	shuffle(card_array);
+	addCardHTML(card_array);
+}
+
+startGame();
 
 /*
 addCardHTML(card_array);
@@ -61,9 +67,9 @@ addCardHTML(card_array);
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
-/*Event listener for opening a card*/
 
 
+/*Function to flip cards and push them in array*/
 function flipCard(e){
 	if (e.target.className != "card match" && e.target.className != "card open show"){
 		e.target.className = "card open show";
@@ -75,6 +81,7 @@ function flipCard(e){
 		
 }
 
+/*Function to check if cards match or not. If they do match, keep them open. If they donot match flip them again*/
 function matchCards(){
 	if (openCards.length == 2)
 		{
@@ -95,34 +102,14 @@ function matchCards(){
 	
 }
 
-
+/*Event listener for opening a card*/
 deck.addEventListener("click",function(e)
 {
 	flipCard(e);
-/*	e.target.className = "card open show";
-	console.log(e.target.childNodes[1].className);
+})
 
-	openCards.push(e.target);
-	
-	if (openCards.length == 2)
-		{
-			let oneCard = openCards.pop();
-			
-
-			let secondCard = openCards.pop();
-
-			if (oneCard.childNodes[1].className == secondCard.childNodes[1].className)
-				{
-					oneCard.className = "card match";
-					secondCard.className = "card match";
-				}
-			else
-				{
-					oneCard.className = "card";
-					secondCard.className = "card";
-				}
-		}
-	
-	console.log(deck.innerHTML);
-*/
+/*Event Listener for resetting the game*/
+reset.addEventListener("click",function()
+{
+	startGame();
 })
