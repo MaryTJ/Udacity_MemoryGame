@@ -18,6 +18,13 @@ const timer = document.querySelector(".timer");
 var moveCounter;
 var allCardsMatched;
 var openCards = new Array();
+//Variables for Modal//
+let modal = document.querySelector(".modal");
+let modalStars = document.querySelector(".modalStars");
+let modalTime =  document.querySelector(".modalTime");
+let noBtn = document.querySelector(".noBtn");
+let yesBtn = document.querySelector(".yesBtn");
+let mStars = 3;
 //Time Calculation variabls//
 var hrs = 0;
 var mins = 0;
@@ -56,27 +63,34 @@ function setInitialStars(){
 function allCardsFlipped(){
 	allCardsMatched = allCardsMatched + 2;
 	if (allCardsMatched == 16){
+		/*
 		alert(`You have finished the game. 
 			Number of Moves: ${moveCounter}
 			Score:`);
+			*/
+		gameEndMessage();
 	}
 }
 
 //Function to change stars color to red based on the number of moves//
 function changeStarColor(){
-	if (moveCounter >= 12 && moveCounter < 20){
+	if (moveCounter >= 14 && moveCounter < 25){
 		starsArray[2].style.color = "red";
+		mStars = 2;
 	}
-	else if (moveCounter >= 20 && moveCounter < 30){
+	else if (moveCounter >= 25 && moveCounter < 35){
 		starsArray[1].style.color = "red";
+		mStars = 1;
 	}
-	else if (moveCounter > 30){
+	else if (moveCounter > 35){
 		starsArray[0].style.color = "red";
+		mStars = 0;
 	}
 }
 
+//Function to restart timer, took help from https://www.w3schools.com/jsref/met_win_cleartimeout.asp//
 function setTimer(){
-	clearTimeout(t);
+	//clearTimeout(t);
 	secs = 0;
 	mins = 0;
 	hrs = 0;
@@ -107,6 +121,15 @@ function calcTime(){
 	}
 	t = setTimeout(calcTime, 1000);
 	
+}
+
+//Function for game end message//
+function gameEndMessage(){
+	console.log(mStars);
+	modalStars.innerHTML = ` Stars : ${mStars} `
+	modalTime.textContent = timer.textContent;
+	modal.style.display = "block";
+	clearTimeout(t);
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -211,5 +234,18 @@ deck.addEventListener("click",function(e)
 /*Event Listener for resetting the game*/
 reset.addEventListener("click",function()
 {
+	startGame();
+})
+
+//If the user doesnt want to play the game, close the window//
+noBtn.addEventListener("click",function()
+{
+	modal.style.display = "none";
+})
+
+//If the user wants to play the game, close the window and restart game//
+yesBtn.addEventListener("click",function()
+{	
+	modal.style.display = "none";
 	startGame();
 })
