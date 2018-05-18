@@ -4,9 +4,9 @@ const reset = document.querySelector(".restart");
 const moveCount = document.querySelector(".moves");
 const starsArray = document.querySelectorAll(".fa-star");
 const timer = document.querySelector(".timer");
-var moveCounter;
-var allCardsMatched;
-var openCards = new Array();
+let moveCounter;
+let allCardsMatched;
+let openCards = new Array();
 //Variables for Modal//
 let modal = document.querySelector(".modal");
 let modalStars = document.querySelector(".modalStars");
@@ -18,7 +18,7 @@ let mStars = 3;
 let hrs = 0;
 let mins = 0;
 let secs = 0;
-var t;//For time out function
+let t;//For time out function
 //===========================//
 let card_array = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-anchor", "fa fa-leaf", "fa fa-bicycle", "fa fa-diamond",
 				 "fa fa-bomb", "fa fa-leaf", "fa fa-bomb", "fa fa-bolt", "fa fa-bicycle", "fa fa-paper-plane-o", "fa fa-cube"]
@@ -70,6 +70,9 @@ function changeStarColor(){
 
 //Function to restart timer, took help from https://www.w3schools.com/jsref/met_win_cleartimeout.asp//
 function setTimer(){
+	if (t != null){ //clear time out so that multiple timers dont start
+		clearTimeout(t);
+	}
 	secs = 0;
 	mins = 0;
 	hrs = 0;
