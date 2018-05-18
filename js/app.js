@@ -15,9 +15,9 @@ let noBtn = document.querySelector(".noBtn");
 let yesBtn = document.querySelector(".yesBtn");
 let mStars = 3;
 //Time Calculation variabls//
-var hrs = 0;
-var mins = 0;
-var secs = 0;
+let hrs = 0;
+let mins = 0;
+let secs = 0;
 var t;//For time out function
 //===========================//
 let card_array = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-anchor", "fa fa-leaf", "fa fa-bicycle", "fa fa-diamond",
