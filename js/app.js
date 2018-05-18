@@ -191,12 +191,16 @@ addCardHTML(card_array);
 
 /*Function to flip cards and push them in array*/
 function flipCard(e){
-	if (e.target.className != "card match" && e.target.className != "card open show"){
-		e.target.className = "card open show";
-		openCards.push(e.target);
-		setTimeout(function(){
-		matchCards()},50);
-		incrementCounter();
+	console.log(e.target.className);
+	console.log(e.target.tagName);
+	if (e.target.tagName == "LI"){
+		if (e.target.className != "card match" && e.target.className != "card open show"){
+			e.target.className = "card open show";
+			openCards.push(e.target);
+			setTimeout(function(){
+			matchCards()},50);
+			incrementCounter();
+		}
 	}
 		
 }
