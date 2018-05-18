@@ -3,9 +3,9 @@
 ## Table of Contents
 
 * [Overview](#overview)
-* [Prerequisites](#dependencies)
+* [Dependencies](#dependencies)
 * [Functionality](#functionality)
-* [Acknowledgements](#credits)
+* [Credits](#credits)
 * [Author](#author)
 
 ## Overview
@@ -15,6 +15,7 @@ This is a memory game project built using HTML, CSS and Javascript. It is part o
 ## Dependencies
 
 This project uses the following:
+
 	* Bootstrap
 	* Font-awesome
 	* GoogleAPI Font(Coda)
@@ -29,6 +30,7 @@ At any point in time the user can click on restart icon to restart the game.
 ## Credits
 
 These websites were frequently used while developing the game
+
 	* https://www.w3schools.com/howto/howto_css_modals.asp
 	* https://www.ostraining.com/blog/coding/stopwatch/
 	* https://www.w3schools.com/jsref/met_win_cleartimeout.asp
