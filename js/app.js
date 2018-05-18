@@ -1,15 +1,4 @@
-/*
- * Create a list that holds all of your cards
- */
-
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-
+/* Global variables needed throught the code*/
 const deck = document.querySelector(".deck");
 const reset = document.querySelector(".restart");
 const moveCount = document.querySelector(".moves");
@@ -63,11 +52,6 @@ function setInitialStars(){
 function allCardsFlipped(){
 	allCardsMatched = allCardsMatched + 2;
 	if (allCardsMatched == 16){
-		/*
-		alert(`You have finished the game. 
-			Number of Moves: ${moveCounter}
-			Score:`);
-			*/
 		gameEndMessage();
 	}
 }
@@ -78,11 +62,6 @@ function changeStarColor(){
 		starsArray[2].style.color = "red";
 		mStars = 2;
 	}
-	/*
-	else if (moveCounter >= 25 && moveCounter < 35){
-		starsArray[1].style.color = "red";
-		mStars = 1;
-	}*/
 	else if (moveCounter >= 35){
 		starsArray[1].style.color = "red";
 		mStars = 1;
@@ -91,7 +70,6 @@ function changeStarColor(){
 
 //Function to restart timer, took help from https://www.w3schools.com/jsref/met_win_cleartimeout.asp//
 function setTimer(){
-	//clearTimeout(t);
 	secs = 0;
 	mins = 0;
 	hrs = 0;
@@ -121,13 +99,12 @@ function calcTime(){
 		timer.innerHTML = `Time elapsed: ${hrs}:${mins}:${secs}`;
 	}
 	t = setTimeout(calcTime, 1000);
-	
 }
 
-//Function for game end message//
+//Function for displaying game end message//
 function gameEndMessage(){
 	console.log(mStars);
-	modalStars.innerHTML = ` Stars : ${mStars} `
+	modalStars.innerHTML = ` Stars : ${mStars} `;
 	modalTime.textContent = timer.textContent;
 	modal.style.display = "block";
 	clearTimeout(t);
@@ -149,10 +126,7 @@ function shuffle(array) {
 }
 
 /*Function to rename elements based on the shuffled array*/
-function addCardHTML(card_array) {
-	
-	/*let deck = document.querySelector(".deck");*/
-	
+function addCardHTML(card_array) {	
 	const liElements = deck.getElementsByTagName("li");
 	const iElements = deck.getElementsByTagName("i");
 
@@ -160,7 +134,6 @@ function addCardHTML(card_array) {
 		liElements[i].className = "card";
 		iElements[i].className = card_array[i];
 	}
-
 }
 
 /*Function to start/restart game and set parameters*/
@@ -173,22 +146,6 @@ function startGame(){
 	setCardsMatched();
 	setInitialStars();
 }
-
-startGame();
-
-/*
-addCardHTML(card_array);
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
-
 
 /*Function to flip cards and push them in array*/
 function flipCard(e){
@@ -203,7 +160,6 @@ function flipCard(e){
 			incrementCounter();
 		}
 	}
-		
 }
 
 /*Function to check if cards match or not. If they do match, keep them open. If they donot match flip them again*/
@@ -224,9 +180,10 @@ function matchCards(){
 					oneCard.className = "card";
 					secondCard.className = "card";
 				}
-		}
-	
+		}	
 }
+/* Function call to start game*/
+startGame();
 
 /*Event listener for opening a card*/
 deck.addEventListener("click",function(e)
@@ -242,13 +199,13 @@ reset.addEventListener("click",function()
 	startGame();
 })
 
-//If the user doesnt want to play the game, close the window//
+//If the user doesnot want to play the game, close the popup dialog box//
 noBtn.addEventListener("click",function()
 {
 	modal.style.display = "none";
 })
 
-//If the user wants to play the game, close the window and restart game//
+//If the user wants to play the game, close the dialog box and restart game//
 yesBtn.addEventListener("click",function()
 {	
 	modal.style.display = "none";
