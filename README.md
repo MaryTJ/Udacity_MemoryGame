@@ -38,4 +38,4 @@ These websites were frequently used while developing the game
 
 ## Author
 
-This game is developed by Marium Talha for the Udacity FrontEnd Web development Course.
+This game is developed by Marium Talha for the Udacity FrontEnd Web development Course using the starter code provided by Udacity.
