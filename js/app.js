@@ -74,17 +74,18 @@ function allCardsFlipped(){
 
 //Function to change stars color to red based on the number of moves//
 function changeStarColor(){
-	if (moveCounter >= 14 && moveCounter < 25){
+	if (moveCounter >= 20 && moveCounter < 35){
 		starsArray[2].style.color = "red";
 		mStars = 2;
 	}
+	/*
 	else if (moveCounter >= 25 && moveCounter < 35){
 		starsArray[1].style.color = "red";
 		mStars = 1;
-	}
-	else if (moveCounter > 35){
-		starsArray[0].style.color = "red";
-		mStars = 0;
+	}*/
+	else if (moveCounter >= 35){
+		starsArray[1].style.color = "red";
+		mStars = 1;
 	}
 }
 
